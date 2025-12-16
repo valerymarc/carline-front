@@ -1,0 +1,86 @@
+<div class="bg" style="background-color:#F8F8F8;">
+  <nz-spin [nzSpinning]="isSpin" [nzSize]="'large'" nzTip="Working...">
+    <div class="parent">
+      <div class="child">
+        <div nz-row class="imgDiv">
+          <div nz-col nzSpan="24">
+            <h1 style="margin-left: 80px;">Inscription</h1>
+          </div>
+        </div>
+
+        <form nz-form [formGroup]="inscriptionForm">
+
+          <!-- Nom -->
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="userErrorTpl">
+              <nz-input-group [nzPrefix]="userIcon">
+                <input nz-input class="login-form-input" placeholder="Nom" formControlName="nom" />
+              </nz-input-group>
+              <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                  Veuillez entrer votre nom d'utilisateur s'il vous plait !
+                </ng-container>
+              </ng-template>
+              <ng-template #userIcon>
+                <span nz-icon nzType="user" nzTheme="outline"></span>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+
+          <!-- Email -->
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="'Cet email saisi n’est pas valide'">
+              <nz-input-group [nzPrefix]="mailIcon">
+                <input nz-input class="login-form-input" placeholder="Email" formControlName="email" />
+              </nz-input-group>
+              <ng-template #mailIcon>
+                <span nz-icon nzType="mail" nzTheme="outline"></span>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+
+          <!-- Mot de passe -->
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorPass">
+              <nz-input-group [nzPrefix]="lockIcon">
+                <input nz-input class="login-form-input" placeholder="Mot de passe" type="password" formControlName="password" />
+              </nz-input-group>
+              <ng-template #lockIcon>
+                <span nz-icon nzType="lock" nzTheme="outline"></span>
+              </ng-template>
+              <ng-template #errorPass let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                  Le mot de passe est requis !
+                </ng-container>
+                <ng-container *ngIf="control.hasError('pattern')">
+                  Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+
+          <!-- Confirmation mot de passe -->
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
+              <input nz-input class="login-form-input" placeholder="Confirmez le mot de passe" type="password" formControlName="confimPassword" />
+              <ng-template #errorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                  Veuillez confirmer votre mot de passe s'il vous plait !
+                </ng-container>
+                <ng-container *ngIf="control.hasError('confirm')">
+                  Les mots de passe saisis ne sont pas identiques
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+
+          <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" (click)="inscription()">
+            <p id="sauv">Enregistrer</p>
+          </button>
+          Ou <a routerLink="/login">Connectez-vous !</a>
+
+        </form>
+      </div>
+    </div>
+  </nz-spin>
+</div>

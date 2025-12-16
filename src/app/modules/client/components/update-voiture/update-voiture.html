@@ -1,0 +1,213 @@
+<div class="update-voiture-container">
+  <nz-spin [nzSpinning]="isSpin" [nzSize]="'large'" nzTip="Working...">
+    <div class="parent">
+      <div class="child">
+        <div nz-row class="imgDiv">
+          <h2 style="margin-left: 190px">Mettre à jour la Voiture</h2>
+        </div>
+
+        <form nz-form [formGroup]="updateVoitureForm" (ngSubmit)="updateVoiture()">
+          <div nz-row>
+
+            <div class="file-upload-container">
+
+             <label class="file-upload-label">
+                <span style="margin-left: 100px;">Selectionner une image</span>
+                <input type="file" nz-button nzType="primary" accept="image/x-png, image/gif, image/jpeg, image/jpg"
+                (change)="onFileSelected($event)" />
+             </label>
+             <div *ngIf="imagePreview" class="image-preview">
+                <div class="circle-image">
+                    <img [src]="imagePreview" alt="Image de la voiture" class="preview-image" />
+                </div>
+             </div>
+
+            <div *ngIf="imageExistante" class="image-preview">
+                <div class="circle-image">
+              <img [src]="imageExistante" alt="Image de la voiture" class="preview-image" />
+              </div>
+           </div>
+
+           </div>
+
+          
+            <br><br>
+
+
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-control
+                  nzHasFeedback
+                  nzXs="24"
+                  nzErrorTip="Ce champ est obligtoire !"
+                >
+                  <nz-select
+                    nzShowSearch
+                    nzAllowClear
+                    nzPlaceHolder="Sélectionnez une marque de voiture"
+                    formControlName="marque"
+                  >
+                    <nz-option
+                      *ngFor="let marque of listeMarques"
+                      nzLabel="{{ marque }}"
+                      nzValue="{{ marque }}"
+                    >
+                    </nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-control
+                  nzHasFeedback
+                  nzXs="24"
+                  nzErrorTip="Ce champ est obligtoire !"
+                >
+                  <input
+                    nz-input
+                    placeholder="Nom"
+                    formControlName="nom"
+                    style="width: 100%"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-control
+                  nzHasFeedback
+                  nzXs="24"
+                  nzErrorTip="Ce champ est obligtoire !"
+                >
+                  <nz-select
+                    nzShowSearch
+                    nzAllowClear
+                    nzPlaceHolder="Sélectionnez un type de voiture"
+                    formControlName="type"
+                  >
+                    <nz-option
+                      *ngFor="let type of listeTypes"
+                      nzLabel="{{ type }}"
+                      nzValue="{{ type }}"
+                    >
+                    </nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-control
+                  nzHasFeedback
+                  nzXs="24"
+                  nzErrorTip="Ce champ est obligtoire !"
+                >
+                  <nz-select
+                    nzShowSearch
+                    nzAllowClear
+                    nzPlaceHolder="Sélectionnez une transmission de voiture"
+                    formControlName="transmission"
+                  >
+                    <nz-option
+                      *ngFor="let transmission of listeTransmissions"
+                      nzLabel="{{ transmission }}"
+                      nzValue="{{ transmission }}"
+                    >
+                    </nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-control
+                  nzHasFeedback
+                  nzXs="24"
+                  nzErrorTip="Ce champ est obligtoire !"
+                >
+                  <nz-select
+                    nzShowSearch
+                    nzAllowClear
+                    nzPlaceHolder="Sélectionnez une couleur de voiture"
+                    formControlName="couleur"
+                  >
+                    <nz-option
+                      *ngFor="let couleur of listeCouleurs"
+                      nzLabel="{{ couleur }}"
+                      nzValue="{{ couleur }}"
+                    >
+                    </nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-control
+                  nzHasFeedback
+                  nzXs="24"
+                  nzErrorTip="Ce champ est obligtoire !"
+                >
+                  <nz-year-picker
+                    style="width: 100%"
+                    nzPlaceHolder="Année du modèle"
+                    formControlName="annee"
+                  ></nz-year-picker>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-control
+                  nzHasFeedback
+                  nzXs="24"
+                  nzErrorTip="Ce champ est obligtoire !"
+                >
+                  <input
+                    nz-input
+                    placeholder="Prix"
+                    formControlName="prix"
+                    style="width: 100%"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-control
+                  nzHasFeedback
+                  nzXs="24"
+                  nzErrorTip="Ce champ est obligtoire !"
+                >
+                  <textarea
+                    row="1"
+                    nz-input
+                    placeholder="Description"
+                    formControlName="description"
+                    style="width: 100%"
+                  ></textarea>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <button
+              nz-button
+              class="login-form-button login-form-margin"
+              [nzType]="'primary'"
+            >
+              Enregistrer
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </nz-spin>
+</div>

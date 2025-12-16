@@ -1,0 +1,94 @@
+<div class="inner-content">
+    <nz-spin [nzSpinning]="isSpin" [nzSize]="'large'" nzTip="Working...">
+        <div class="dashboard-filter">
+            <div class="filter-grid" [formGroup]="searchVoitureForm">
+                <div class="filter-select-dropdown filter-fields-with">
+
+                       <nz-form-item>
+                        <nz-form-label nzFor="gender">Marque</nz-form-label>
+                <nz-form-control nzHasFeedback nzErrorTip="Ce champ est obligtoire !">
+                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Sélectionnez une marque de voiture" formControlName="marque">
+                    <nz-option *ngFor="let marque of listeMarques" nzLabel="{{ marque }}" nzValue="{{ marque }}">
+                    </nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+
+<nz-form-item>
+                        <nz-form-label nzFor="gender">Type</nz-form-label>
+                <nz-form-control nzHasFeedback nzErrorTip="Ce champ est obligtoire !">
+                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Sélectionnez un type de voiture" formControlName="type">
+                    <nz-option *ngFor="let type of listeTypes" nzLabel="{{ type }}" nzValue="{{ type }}">
+                    </nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+
+
+              <nz-form-item>
+                        <nz-form-label nzFor="gender">Couleur</nz-form-label>
+                <nz-form-control nzHasFeedback nzErrorTip="Ce champ est obligtoire !">
+                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Sélectionnez une couleur de voiture" formControlName="couleur">
+                    <nz-option *ngFor="let couleur of listeCouleurs" nzLabel="{{ couleur }}" nzValue="{{ couleur }}">
+                    </nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+
+
+              <nz-form-item>
+                        <nz-form-label nzFor="gender">Transmission</nz-form-label>
+                <nz-form-control nzHasFeedback nzErrorTip="Ce champ est obligtoire !">
+                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Sélectionnez une transmission" formControlName="transmission">
+                    <nz-option *ngFor="let transmission of listeTransmissions" nzLabel="{{ transmission }}" nzValue="{{ transmission }}">
+                    </nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+
+                </div>
+
+            <div class="filter-select-dropdown filter-fields-with">
+                <button class="filterBtn" nz-button nzType="primary" (click)="searchVoiture()">Rechercher une voiture</button>
+             </div>
+
+
+            </div>
+        </div>
+    </nz-spin>
+</div>
+
+<div class="wrapper-voitures">
+  <div class="child" *ngFor="let voiture of voitures">
+    <div nz-row>
+      <div nz-col nzSpan="8">
+        <img class="profile"
+          [src]="'data:image/jpeg;base64,' + voiture.returnedImg"
+          alt="profile">
+      </div>
+
+      <div nz-col nzSpan="16">
+        <h2>{{ voiture.marque }} - {{ voiture.nom }}</h2>
+        <p>{{ voiture.description }}</p>
+        <hr>
+        <h5>
+          Prix : <b>{{ voiture.prix }} €</b> - Couleur : <b>{{ voiture.couleur }}</b> -
+          Transmission : <b>{{ voiture.transmission }}</b> - Type : <b>{{ voiture.type }}</b> -
+          Année : <b>{{ voiture.annee | date: 'yyyy' }}</b>
+        </h5>
+        <hr>
+        <div class="actions">
+          <button nzSize="small" *ngIf="!voiture.estVendu" nz-button nzType="primary"
+            [routerLink]="'/client/voiture/' + voiture.id + '/reserver'">
+            Faire une offre
+          </button>
+          <button nzSize="small" *ngIf="voiture.estVendu" nzDanger nz-button nzType="primary">
+            <span nz-icon nzType="check-circle" nzTheme="outline"></span> Vendu
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

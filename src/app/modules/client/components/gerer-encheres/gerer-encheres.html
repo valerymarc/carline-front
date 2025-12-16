@@ -1,0 +1,39 @@
+<nz-spin [nzSpinning]="isSpin" [nzSize]="'large'" nzTip="Working...">
+    <div style="padding: 20px;">
+        <nz-table #basicTable [nzData]="encheres" [nzPageSize]="20" [nzShowPagination]="false">
+            <thead>
+                <tr>
+                    <th style="font-weight: bolder; color: #003973;">Nom de la voiture</th>
+                    <th style="font-weight: bolder; color: #003973;">Marque de la voiture</th>
+                    <th style="font-weight: bolder; color: #003973;">Vendeur de la voiture</th>
+                    <th style="font-weight: bolder; color: #003973;">Prix</th>
+                    <th style="font-weight: bolder; color: #003973;">Statut</th>
+                    <th style="font-weight: bolder; color: #003973;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reservation of basicTable.data">
+                    <td>{{ reservation.nomVoiture }}</td>
+                    <td>{{ reservation.marqueVoiture }}</td>
+                    <td>{{ reservation.nomVendeur }}</td>
+                    <td>{{ reservation.prix }}</td>
+                    <td>
+                        <strong
+                            [ngStyle]="{'color': reservation.statutOffre === 'APPROUVE' ? 'green' : reservation.statutOffre === 'REJETE' ? 'red' : 'blue'}">
+                            {{ reservation.statutOffre }}
+                        </strong>
+                    </td>
+                    <td>
+                        <span *ngIf="reservation.statutOffre == 'ATTENTE'">
+                           <button style="margin-left: 10px;" nzSize="small" nz-button nzType="primary"
+                           (click)="changeStatutEnchere(reservation.id, 'Approuve')">Approuver</button>
+                           <button style="margin-left: 10px;" nzSize="small" nz-button nzType="primary" nzDanger
+                           (click)="changeStatutEnchere(reservation.id, 'Rejete')">Rejeter</button>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</nz-spin>
+

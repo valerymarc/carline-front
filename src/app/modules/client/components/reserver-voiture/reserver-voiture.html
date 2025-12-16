@@ -1,0 +1,48 @@
+<div style="background-color: #F8F8F8; min-height: 91vh;">
+  <div style="padding-top: 10px;"></div>
+    <div nz-row>
+    <div nz-col nzSpan="8">
+      <img class="profile" style="height: 130px; width: 200px; border-radius: 10px;" 
+         [src]="'data:image/jpeg;base64,' + voiture.returnedImg" alt="profile" />
+    </div>
+    <div nz-col nzSpan="16">
+      <h2 style="cursor: pointer; color: #108EE9;">
+        {{ voiture.marque }} - {{ voiture.nom }}
+      </h2>
+      <p>{{ voiture.description }}</p>
+      <hr>
+      <h5>
+            Prix : <b>{{ voiture.prix }} €</b> - Couleur : <b>{{voiture.couleur}}</b> - Transmission :
+            <b>{{ voiture.transmission }}</b> - Type : <b>{{ voiture.type }}</b> - Année : <b>{{ voiture.annee | date: 'yyyy'}}</b>
+      </h5>
+    </div>
+   </div>
+
+
+   <nz-spin [nzSpinning]="isSpin" [nzSize]="'large'" nzTip="Working..." style="margin-top: 50px;">
+      <div class="child" style="text-align: center;">
+
+         <form nz-form [formGroup]="bidForm">
+            <div>
+                <div>
+                    
+              <nz-form-item nzSpan="24">
+                <nz-form-label nzFlex="From Date">Votre enchère</nz-form-label>
+                <nz-form-control>
+                  <nz-input-number placeholder="Prix" formControlName="prix" style="width: 100%"
+                  [nzMin]="1" [nzStep]="1">
+                  </nz-input-number>
+                </nz-form-control>
+              </nz-form-item>
+                </div>
+                <div>
+                    <button class="filterBtn" nz-button nzType="primary" (click)="bidVoiture(bidForm.value)">Encherir sur la voiture</button>
+                </div>
+            </div>
+         </form>
+      </div>
+    </nz-spin>
+
+</div>
+
+

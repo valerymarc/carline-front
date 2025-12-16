@@ -1,0 +1,55 @@
+<div class="bg" style="background-color:#F8F8F8;">
+  <nz-spin [nzSpinning]="isSpin" [nzSize]="'large'" nzTip="Working...">
+    <div class="parent">
+      <div class="child">
+        <div nz-row class="imgDiv">
+          <div nz-col nzSpan="24">
+            <h1 style="margin-left: 80px;">Connexion</h1>
+          </div>
+        </div>
+
+        <form nz-form [formGroup]="connexionForm">
+          
+          <!-- Champ identifiant (user icon) -->
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="'Cet identifiant n’est pas valide'">
+              <nz-input-group [nzPrefix]="userIcon">
+                <input nz-input class="login-form-input" placeholder="Identifiant" id="email" formControlName="email" />
+              </nz-input-group>
+              <ng-template #userIcon>
+                <nz-icon nzType="user" nzTheme="outline"></nz-icon>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+
+          <!-- Champ mot de passe (lock icon) -->
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorPass">
+              <nz-input-group [nzPrefix]="lockIcon">
+                <input nz-input class="login-form-input" placeholder="Mot de passe" type="password" id="password" formControlName="password" />
+              </nz-input-group>
+              <ng-template #lockIcon>
+                <nz-icon nzType="lock" nzTheme="outline"></nz-icon>
+              </ng-template>
+              <ng-template #errorPass let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                  Le mot de passe est requis !
+                </ng-container>
+                <ng-container *ngIf="control.hasError('pattern')">
+                  Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+
+          <!-- Bouton -->
+          <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" (click)="connexion()">
+            <p id="sauv">Se connecter</p>
+          </button>
+          Ou <a routerLink="/inscription">Inscrivez-vous !</a>
+
+        </form>
+      </div>
+    </div>
+  </nz-spin>
+</div>

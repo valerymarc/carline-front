@@ -1,0 +1,30 @@
+<p>admin-dashboard works!</p>
+
+<div style="background-color: #F8F8F8; min-height: 91vh;">
+<div style="padding-top: 10px;"></div>
+
+<div style="margin-top: 10px;" class="child" *ngFor="let voiture of listeVoitures">
+    <div nz-row>
+        <div nz-col nzSpan="8">
+          <img class="profile" style="height: 130px; width: 200px; border-radius: 10px;" 
+         [src]="'data:image/jpeg;base64,' + voiture.returnedImg" alt="profile">
+
+        </div>
+
+        <div nz-col nzSpan="16">
+           <h2 style="cursor: pointer; color: #108EE9;">
+            {{ voiture.marque }} - {{ voiture.nom }}
+           </h2>
+           <p>{{ voiture.description }}</p>
+           <hr>
+           <h5>
+            Prix : <b>{{ voiture.prix }} €</b> - Couleur : <b>{{voiture.couleur}}</b> - Transmission :
+            <b>{{ voiture.transmission }}</b> - Type : <b>{{ voiture.type }}</b> - Année : <b>{{ voiture.annee | date: 'yyyy'}}</b>
+           </h5>
+           <hr>
+        </div>
+    </div>
+
+</div>
+
+</div>

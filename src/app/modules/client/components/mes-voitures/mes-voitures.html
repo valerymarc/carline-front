@@ -1,0 +1,41 @@
+<div style="background-color: #F8F8F8; min-height: 91vh;">
+<div style="padding-top: 10px;"></div>
+
+<button class="green-btn" nzSize="small"  nz-button nzType="primary"  routerLink="/client/ajout-voiture">Ajouter une voiture</button><br>
+
+<div style="margin-top: 10px;" class="child" *ngFor="let voiture of listeVoitures">
+    
+    <div nz-row>
+        <div nz-col nzSpan="8">
+          <img class="profile" style="height: 130px; width: 200px; border-radius: 10px;" 
+         [src]="'data:image/jpeg;base64,' + voiture.returnedImg" alt="profile">
+
+        </div>
+
+        <div nz-col nzSpan="16">
+           <h2 style="cursor: pointer; color: #108EE9;">
+            {{ voiture.marque }} - {{ voiture.nom }}
+           </h2>
+           <p>{{ voiture.description }}</p>
+           <hr>
+           <h5>
+            Prix : <b>{{ voiture.prix }} €</b> - Couleur : <b>{{voiture.couleur}}</b> - Transmission :
+            <b>{{ voiture.transmission }}</b> - Type : <b>{{ voiture.type }}</b> - Année : <b>{{ voiture.annee | date: 'yyyy'}}</b>
+           </h5>
+           <hr>
+    
+           <div style="float: right;">
+             <button nzSize="small" *ngIf="voiture.estVendu" nzDanger style="margin-left: 5px;" nz-button nzType="primary"
+               nzType="primary" routerLink="/client/voiture/{{voiture.id}}/reserver"><span nz-icon nzType="check-circle" nztheme="outline"></span>  Vendu</button>&nbsp;&nbsp;
+            <button nzSize="small"  nz-button nzType="primary"  routerLink="/client/gestion-encheres/{{voiture.id}}">Gérer les encheres</button>&nbsp;&nbsp;   
+            <button nzSize="small" class="yellow-btn" nz-button nzType="default"  routerLink="/client/voiture/edit/{{voiture.id}}">Mettre à jour</button>&nbsp;&nbsp;
+            <button nzSize="small" nz-button nzType="primary" nzDanger (click)="deleteVoiture(voiture.id)">Supprimer</button>
+           </div>
+
+        </div>
+    </div>
+
+</div>
+
+</div>
+
